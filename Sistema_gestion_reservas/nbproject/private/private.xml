@@ -3,7 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/LUIS/Documents/NetBeansProjects/Sistema_gestion_reservas/src/sistema_gestion_reservas/Sistema_gestion_reservas.java</file>
+            <file>file:/C:/Users/LUIS/Documents/GitHub/Dise-o_patrones/Sistema_gestion_reservas/src/Negocio/enums/TipoEventoReserva.java</file>
+            <file>file:/C:/Users/LUIS/Documents/GitHub/Dise-o_patrones/Sistema_gestion_reservas/src/Negocio/entidades/Habitacion.java</file>
+            <file>file:/C:/Users/LUIS/Documents/GitHub/Dise-o_patrones/Sistema_gestion_reservas/src/Negocio/entidades/Reserva.java</file>
+            <file>file:/C:/Users/LUIS/Documents/GitHub/Dise-o_patrones/Sistema_gestion_reservas/src/Negocio/enums/EstadoReserva.java</file>
+            <file>file:/C:/Users/LUIS/Documents/GitHub/Dise-o_patrones/Sistema_gestion_reservas/src/Negocio/entidades/Huesped.java</file>
+            <file>file:/C:/Users/LUIS/Documents/GitHub/Dise-o_patrones/Sistema_gestion_reservas/src/Negocio/enums/EstadoHabitacion.java</file>
+            <file>file:/C:/Users/LUIS/Documents/GitHub/Dise-o_patrones/Sistema_gestion_reservas/src/Negocio/enums/TipoHabitacion.java</file>
+            <file>file:/C:/Users/LUIS/Documents/GitHub/Dise-o_patrones/Sistema_gestion_reservas/src/Datos/ConexionMySQL.java</file>
         </group>
     </open-files>
 </project-private>
