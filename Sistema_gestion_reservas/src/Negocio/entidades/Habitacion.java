@@ -69,4 +69,13 @@ public class Habitacion {
     public int getCapacidad() {
         return tipo.getCapacidad();
     }
+
+    @Override
+    public String toString() {
+        if (tipo == null) {
+            return numero != null ? numero : "";
+        }
+        String nombreTipo = tipo.name().charAt(0) + tipo.name().substring(1).toLowerCase();
+        return numero + " - " + nombreTipo;
+    }
 }

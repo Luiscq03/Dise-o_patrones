@@ -167,7 +167,7 @@ public class ReservaRepositorioMySQL implements ReservaRepositorio{
 
         String sql = "SELECT COUNT(*) FROM reservas "
                 + "WHERE habitacion_id = ? "
-                + "AND estado IN ('PENDIENTE', 'CONFIRMADA') "
+                + "AND estado IN ('PENDIENTE', 'CONFIRMADO', 'CONFIRMADA') "
                 + "AND fecha_entrada < ? "
                 + "AND fecha_salida > ? "
                 + "AND id <> ?";
@@ -214,12 +214,12 @@ public class ReservaRepositorioMySQL implements ReservaRepositorio{
         habitacion.setNumero(rs.getString("numero"));
 
         habitacion.setTipo(
-                TipoHabitacion.valueOf(rs.getString("tipo"))
+                TipoHabitacion.valueOf(rs.getString("tipo").trim().toUpperCase())
         );
 
         habitacion.setEstado(
                 EstadoHabitacion.valueOf(
-                        rs.getString("estado_habitacion")
+                        rs.getString("estado_habitacion").trim().toUpperCase()
                 )
         );
 
@@ -249,35 +249,47 @@ public class ReservaRepositorioMySQL implements ReservaRepositorio{
                 rs.getString("observaciones")
         );
 
-        reserva.setEstado(
-                EstadoReserva.valueOf(rs.getString("estado"))
-        );
+        String estadoBD = rs.getString("estado").trim().toUpperCase();
+        if ("CONFIRMADA".equals(estadoBD)) {
+            reserva.setEstado(EstadoReserva.CONFIRMADO);
+        } else if ("CANCELADA".equals(estadoBD)) {
+            reserva.setEstado(EstadoReserva.CANCELADO);
+        } else {
+            reserva.setEstado(EstadoReserva.valueOf(estadoBD));
+        }
 
         return reserva;
     }
+
     @Override
-public boolean tieneReservasActivasFuturas(
-        int habitacionId,
-        LocalDate fecha) throws SQLException {
+    public boolean tieneReservasActivasFuturas(
+            int habitacionId,
+            LocalDate fecha) throws SQLException {
 
-    String sql = "SELECT COUNT(*) FROM reservas "
-            + "WHERE habitacion_id = ? "
-            + "AND estado IN ('PENDIENTE', 'CONFIRMADA') "
-            + "AND fecha_salida > ?";
+        String sql = "SELECT COUNT(*) FROM reservas "
+                + "WHERE habitacion_id = ? "
+                + "AND estado IN ('PENDIENTE', 'CONFIRMADO', 'CONFIRMADA') "
+                + "AND fecha_salida > ?";
 
-    try (Connection cn = ConexionMySQL.getConnection();
-         PreparedStatement ps = cn.prepareStatement(sql)) {
+        try (Connection cn = ConexionMySQL.getConnection()) {
 
-        ps.setInt(1, habitacionId);
-        ps.setDate(2, java.sql.Date.valueOf(fecha));
+            if (cn == null) {
+                throw new SQLException("No hay conexion con MySQL");
+            }
 
-        try (ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
+            try (PreparedStatement ps = cn.prepareStatement(sql)) {
+
+                ps.setInt(1, habitacionId);
+                ps.setDate(2, java.sql.Date.valueOf(fecha));
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getInt(1) > 0;
+                    }
+                }
             }
         }
-    }
 
-    return false;
-}
+        return false;
+    }
 }

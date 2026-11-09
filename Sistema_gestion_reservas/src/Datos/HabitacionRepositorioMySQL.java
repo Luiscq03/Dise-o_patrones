@@ -77,10 +77,10 @@ public class HabitacionRepositorioMySQL implements HabitacionRepositorio{
                     h.setNumero(rs.getString("numero"));
 
                     h.setTipo(TipoHabitacion.valueOf(
-                            rs.getString("tipo")));
+                            rs.getString("tipo").trim().toUpperCase()));
 
                     h.setEstado(EstadoHabitacion.valueOf(
-                            rs.getString("estado")));
+                            rs.getString("estado").trim().toUpperCase()));
 
                     lista.add(h);
                 }
@@ -116,10 +116,10 @@ public class HabitacionRepositorioMySQL implements HabitacionRepositorio{
                         h.setNumero(rs.getString("numero"));
 
                         h.setTipo(TipoHabitacion.valueOf(
-                                rs.getString("tipo")));
+                                rs.getString("tipo").trim().toUpperCase()));
 
                         h.setEstado(EstadoHabitacion.valueOf(
-                                rs.getString("estado")));
+                                rs.getString("estado").trim().toUpperCase()));
 
                         return h;
                     }

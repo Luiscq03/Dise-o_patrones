@@ -25,9 +25,11 @@ public class ConexionMySQL {
         Connection conexion = null;
 
         try {
-            conexion = DriverManager.getConnection(
-                    URL, USER, PASSWORD
-            );
+            try {
+                conexion = DriverManager.getConnection(URL, USER, PASSWORD);
+            } catch (SQLException ex) {
+                conexion = DriverManager.getConnection(URL, USER, "");
+            }
 
             System.out.println("Conexion exitosa a MySQL");
 

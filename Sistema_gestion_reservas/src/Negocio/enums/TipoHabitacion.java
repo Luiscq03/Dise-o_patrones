@@ -11,6 +11,8 @@ package Negocio.enums;
 public enum TipoHabitacion {
     INDIVIDUAL(1, 90.00),
     DOBLE(2, 150.00),
+    MATRIMONIAL(2, 180.00),
+    TWIN(2, 160.00),
     FAMILIAR(4, 220.00),
     SUITE(6, 350.00);
 
